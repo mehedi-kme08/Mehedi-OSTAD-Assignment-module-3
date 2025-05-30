@@ -67,7 +67,7 @@ jobs:
         run: |
           echo "Starting Application..."
           pm2 kill || true
-          pm2 start path/to/server.js --name Node-App
+          pm2 start src/server.js --name Node-App
       
       - name: Notify deployment success
         run: echo "Deployment successful!"
