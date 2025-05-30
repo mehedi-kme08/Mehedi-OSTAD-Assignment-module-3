@@ -1,0 +1,36 @@
+name: CI/CD pipeline for M3 Assignment
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: mehedi-self-runner
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      
+      - name: Install Node
+        run: npm install
+      
+      - name: Run tests & store logs
+        run: |
+          echo "Running tests..."
+          mkdir -p test-results
+          npm run check > test-results/test-results.txt
+          echo "Tests completed. Logs stored in test-results.txt"
+      
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/test-results.txt
+      
