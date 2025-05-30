@@ -23,7 +23,7 @@ jobs:
       
       - name: Run tests & store logs
         run: |
-          echo "Running tests..."
+          echo "Running tests...."
           mkdir -p test-results
           npm run check > test-results/test-results.txt
           echo "Tests completed. Logs stored in test-results.txt"
@@ -65,7 +65,7 @@ jobs:
       
       - name: Start Application with PM2
         run: |
-          echo "Starting Application..."
+          echo "Starting Application...."
           pm2 kill || true
           pm2 start src/server.js --name Node-App
       
