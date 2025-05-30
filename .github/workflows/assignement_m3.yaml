@@ -60,10 +60,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install PM2
+        run: npm install pm2 -g
+      
       - name: Start Application
         run: |
           echo "Starting Application..."
-          npm start
+          pm2 kill || true
+          pm2 start server.js --name Node-App
       
       - name: Notify deployment success
         run: echo "Deployment successful!"
