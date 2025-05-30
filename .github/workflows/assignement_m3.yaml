@@ -33,4 +33,38 @@ jobs:
         with:
           name: test-results
           path: test-results/test-results.txt
+  
+  deploy:
+    runs-on: mehedi-self-runner
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: download test results
+        uses: actions/download-artifact@v4
+        with:
+          name: test-results
+
+      - name: Display test results
+        run: |
+          echo "Displaying test results..."
+          cat test-results.txt
+          echo "Test results displayed successfully."
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start Application
+        run: |
+          echo "Starting Application..."
+          npm start
+      
+      - name: Notify deployment success
+        run: echo "Deployment successful!"
       
